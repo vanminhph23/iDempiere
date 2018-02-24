@@ -1,6 +1,6 @@
 /******************************************************************************
- * Copyright (C) 2012 Heng Sin Low                                            *
- * Copyright (C) 2012 Trek Global                 							  *
+ * Product: iDempiere ERP & CRM Smart Business Solution                       *
+ * Copyright (C) 1999-2018 iDempiere.org. All Rights Reserved.               *
  * This program is free software; you can redistribute it and/or modify it    *
  * under the terms version 2 of the GNU General Public License as published   *
  * by the Free Software Foundation. This program is distributed in the hope   *
@@ -11,27 +11,30 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,    *
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
  *****************************************************************************/
-package org.adempiere.webui.action;
+package org.adempiere.webui.apps;
 
-import org.zkoss.zul.Toolbarbutton;
+import org.adempiere.webui.editor.WEditor;
 
 /**
- * Custom UI action provided through OSGi service. Implementation must be thread safe.   
+ * Listener interface for process parameter panel
  * @author hengsin
  *
  */
-public interface IAction {
+public interface IProcessParameterListener {
 	/**
-	 * 
-	 * @param target
+	 * on value change of parameter field editor
+	 * @param parameterPanel
+	 * @param columnName
+	 * @param editor
 	 */
-	public void execute(Object target);
+	public void onChange(ProcessParameterPanel parameterPanel, String columnName, WEditor editor);
 	
 	/**
-	 * you can customize toolbar button like add style, client javascript,...
-	 * @param toolbarButton
+	 * validate process parameter form
+	 * @param parameterPanel
+	 * @return error message (if any)
 	 */
-	public default void decorate(Toolbarbutton toolbarButton) {
-		
-	}
+	public default String validate(ProcessParameterPanel parameterPanel) {
+		return null;
+	}	
 }
