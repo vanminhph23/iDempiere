@@ -88,11 +88,16 @@ public class WLocationEditor extends WEditor implements EventListener<Event>, Pr
 
     private void init()
     {
-    	getComponent().setButtonImage(ThemeManager.getThemeResource("images/Location16.png"));
+    	if (ThemeManager.isUseFontIconForImage())
+    		getComponent().getButton().setIconSclass("z-icon-Location");
+    	else
+    		getComponent().setButtonImage(ThemeManager.getThemeResource("images/Location16.png"));
     	
     	popupMenu = new WEditorPopupMenu(false, false, isShowPreference());
     	popupMenu.addMenuListener(this);
-    	addChangeLogMenu(popupMenu);    	
+    	addChangeLogMenu(popupMenu);
+		if (gridField != null)
+    		getComponent().getTextbox().setPlaceholder(gridField.getPlaceholder());
     }
     
 	@Override

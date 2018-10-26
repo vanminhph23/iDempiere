@@ -63,3 +63,5 @@ Import-Package: fit,
  org.osgi.framework;version="1.3.0"
 Service-Component: OSGI-INF/fitfixturefactory.xml, OSGI-INF/slimfixturefactory.xml
 Export-Package: org.idempiere.fitnesse.fixture
+Bundle-ClassPath: .
+Automatic-Module-Name: org.idempiere.fitnesse.fixture

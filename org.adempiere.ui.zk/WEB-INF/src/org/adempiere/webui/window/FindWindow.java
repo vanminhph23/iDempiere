@@ -440,13 +440,19 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
     private void initAdvanced()
     {
         ToolBarButton btnNew = new ToolBarButton();
-        btnNew.setImage(ThemeManager.getThemeResource("images/New24.png"));
+        if (ThemeManager.isUseFontIconForImage())
+        	btnNew.setIconSclass("z-icon-New");
+        else
+        	btnNew.setImage(ThemeManager.getThemeResource("images/New24.png"));
         btnNew.setAttribute("name", "btnNewAdv");
         btnNew.addEventListener(Events.ON_CLICK, this);
 
         ToolBarButton btnDelete = new ToolBarButton();
         btnDelete.setAttribute("name","btnDeleteAdv");
-        btnDelete.setImage(ThemeManager.getThemeResource("images/Delete24.png"));
+        if (ThemeManager.isUseFontIconForImage())
+        	btnDelete.setIconSclass("z-icon-Delete");
+        else
+        	btnDelete.setImage(ThemeManager.getThemeResource("images/Delete24.png"));
         btnDelete.addEventListener(Events.ON_CLICK, this);
 
         Button btnOk = ButtonFactory.createNamedButton(ConfirmPanel.A_OK);
@@ -574,10 +580,15 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
     	
     	btnSave = new ToolBarButton();
         btnSave.setAttribute("name","btnSaveAdv");
-        btnSave.setImage(ThemeManager.getThemeResource("images/Save24.png"));
+        if (ThemeManager.isUseFontIconForImage())
+        	btnSave.setIconSclass("z-icon-Save");
+        else
+        	btnSave.setImage(ThemeManager.getThemeResource("images/Save24.png"));
         btnSave.addEventListener(Events.ON_CLICK, this);
         btnSave.setId("btnSave");
         btnSave.setStyle("vertical-align: middle;");
+        if (ThemeManager.isUseFontIconForImage())
+        	LayoutUtils.addSclass("large-toolbarbutton", btnSave);
 
         fQueryName = new Combobox();
         fQueryName.setTooltiptext(Msg.getMsg(Env.getCtx(),"QueryName"));
@@ -778,6 +789,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         List<GridField> excludes = new ArrayList<GridField>();
         // adding sorted columns
         for(GridField field:gridFieldList){
+        	if (field.isVirtualUIColumn())
+        		continue;
         	if (!addSelectionColumn (field))
         		excludes.add(field);
 		} 
@@ -791,6 +804,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
 			cell.setColspan(3);
 			cell.setAlign("left");
         	for(GridField field:moreFieldList){
+        		if (field.isVirtualUIColumn())
+        			continue;
             	if (!addSelectionColumn (field, rowg))
             		excludes.add(field);
     		}
@@ -1042,7 +1057,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         for (int c = 0; c < m_findFields.length; c++)
         {
             GridField field = m_findFields[c];
-            if (field == null) continue;
+            if (field == null || field.isVirtualUIColumn())
+            	continue;
             
             String columnName = field.getColumnName();
             String header = field.getHeader();
@@ -1578,7 +1594,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
             String infoName = column.toString();
             //
             GridField field = getTargetMField(ColumnName);
-            if(field == null) continue; // Elaine 2008/07/29
+            if (field == null || field.isVirtualUIColumn())
+            	continue;
             boolean isProductCategoryField = isProductCategoryField(field.getColumnName());
             String ColumnSQL = field.getColumnSQL(false);
             // Left brackets
@@ -1800,6 +1817,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
                     }
 
                     GridField field = getTargetMField(ColumnName);
+                    if (field.isVirtualUIColumn())
+                    	continue;
                     StringBuilder ColumnSQL = new StringBuilder(field.getColumnSQL(false));
                     m_query.addRangeRestriction(ColumnSQL.toString(), value, valueTo,
                     		ColumnName, wed.getDisplay(), wedTo.getDisplay(), true, 0);

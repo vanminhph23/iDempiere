@@ -49,8 +49,8 @@ Import-Package: groovy.transform.stc;version="2.4.7",
  org.springframework.web.util
 DynamicImport-Package: action.images
 Bundle-ClassPath: .,
- WEB-INF/lib/daisydiff-min.jar,
- WEB-INF/lib/ckez.jar
+ WEB-INF/lib/ckez.jar,
+ WEB-INF/lib/daisydiff.jar
 Export-Package: fi.jawsy.jawwa.zk.atmosphere,
  metainfo.zk,
  org.adempiere.webui,
@@ -159,3 +159,4 @@ Eclipse-ExtensibleAPI: true
 Web-ContextPath: webui
 Service-Component: OSGI-INF/reportviewerprovider.xml, OSGI-INF/defaultinfofactory.xml, OSGI-INF/defaulteditorfactory.xml, OSGI-INF/jrviewerprovider.xml, OSGI-INF/resourcefinder.xml, OSGI-INF/defaultpaymentformfactory.xml, OSGI-INF/processfactory.xml, OSGI-INF/defaultprintshippinglabel.xml, OSGI-INF/defaultcreatefromfactory.xml, OSGI-INF/defaultformfactory.xml, OSGI-INF/feedbackservice.xml, OSGI-INF/zulgadgetfactory.xml, OSGI-INF/jfgchartrenderer.xml
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.adempiere.ui.zk
